@@ -3,17 +3,22 @@ import React from 'react';
 import styled from 'styled-components'
 import TicketsInfoLine from './info-line';
 
-const TicketsItem = () => {
+const TicketsItem = ({price, carrier, segments}) => {
+  const changeNumFormat = (num) => {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  }
+
   return (
     <TicketWrap>
       <CardTop>
         <Price variant="h5">
-          22 552 р.
+          {changeNumFormat(price)} Р
         </Price>
-        <Logo src="http://pics.avs.io/99/36/%7BS7%7D.png"/>
+        <div></div>
+        <Logo src={`//pics.avs.io/99/36/${carrier}.png`}/>
       </CardTop>
-      <TicketsInfoLine />
-      <TicketsInfoLine />
+      <TicketsInfoLine {...segments[0]}/>
+      <TicketsInfoLine {...segments[1]}/>
     </TicketWrap>
   );
 };
@@ -21,8 +26,11 @@ const TicketsItem = () => {
 export default TicketsItem;
 
 const CardTop = styled.div`
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  @media (max-width: 400px) {
+    grid-template-columns: 3fr 1fr 3fr;
+  }
 `
 
 const Price = styled(Typography)`
@@ -34,8 +42,8 @@ const Logo = styled.img``
 const TicketWrap = styled(Card)`
   padding: 25px;
   margin-top: 20px;
-  min-width: 345px;
-  @media (max-width: 370px) {
+  min-width: 440px;
+  @media (max-width: 470px) {
     min-width: 290px;
   }
 `

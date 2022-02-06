@@ -37,7 +37,7 @@ function App() {
 export default App;
 
 const Container = styled.div`
-  max-width: 900px;
+  max-width: 800px;
   width: 100%;
   padding: 0 15px;
   margin: 0 auto;

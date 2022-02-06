@@ -73,7 +73,7 @@ const SidebarWrap = styled(Card)`
   min-width: 195px;
   width: 100%;
   user-select: none;
-  @media (max-width: 585px) {
+  @media (max-width: 680px) {
     max-width: 100%;
   }
 `

@@ -20,7 +20,7 @@ const ContentWrap = styled.div`
   align-items: flex-start;
   gap: 1rem;
   margin-bottom: 50px;
-  @media (max-width: 585px) {
+  @media (max-width: 680px) {
     flex-wrap: wrap;
   }
 `
