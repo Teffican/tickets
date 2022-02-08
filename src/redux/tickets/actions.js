@@ -4,6 +4,7 @@ export const SET_SEARCH_ID = 'SET_SEARCH_ID'
 export const SET_TICKETS = 'SET_TICKETS'
 export const SET_IS_LOADED = 'SET_IS_LOADED'
 export const SORT_TICKETS = 'SORT_TICKETS'
+export const FILTER_TICKETS = 'FILTER_TICKETS'
 
 // SearchId
 export const fetchSearchId = () => {
@@ -45,4 +46,10 @@ export const setIsLoaded = (payload) => ({
 export const sortTickets = (sortType) => ({
     type: SORT_TICKETS,
     sortType
+})
+
+// filter
+export const filterTickets = (filter) => ({
+    type: FILTER_TICKETS,
+    filter
 })

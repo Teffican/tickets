@@ -1,14 +1,17 @@
 import { Card, CardContent, Checkbox, FormControlLabel, FormGroup, Typography } from '@mui/material';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { filterTickets } from '../redux/tickets/actions';
 
 const Sidebar = () => {
+  const dispatch = useDispatch()
   const [checkboxAll, setCheckboxAll] = React.useState(true);
   const [checkboxes, setCheckboxes] = React.useState([
-    {title: 'Без пересадок', isChecked: true},
-    {title: '1 пересадка', isChecked: true},
-    {title: '2 пересадки', isChecked: true},
-    {title: '3 пересадки', isChecked: true},
+    {title: 'Без пересадок', isChecked: true, value: 0},
+    {title: '1 пересадка', isChecked: true, value: 1},
+    {title: '2 пересадки', isChecked: true, value: 2},
+    {title: '3 пересадки', isChecked: true, value: 3},
   ]);
 
   const handleClick = (checkbox) => {
@@ -30,6 +33,11 @@ const Sidebar = () => {
   React.useEffect(() => {
     const isAllChecked = checkboxes.every(item=>item.isChecked)
     setCheckboxAll(isAllChecked)
+
+    const activeValues = checkboxes
+      .filter(item => item.isChecked)
+      .map(item => item.value)
+    dispatch(filterTickets(activeValues))
   }, [checkboxes])
 
   return (

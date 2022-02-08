@@ -1,4 +1,4 @@
-import { SET_IS_LOADED, SET_SEARCH_ID, SET_TICKETS, SORT_TICKETS } from "./actions"
+import { FILTER_TICKETS, SET_IS_LOADED, SET_SEARCH_ID, SET_TICKETS, SORT_TICKETS } from "./actions"
 
 const initialState = {
     searchId: '',
@@ -41,6 +41,18 @@ const TicketsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currList: sortedTickets
+            }
+        }
+        case FILTER_TICKETS: {
+            const filteredTickets = [...state.initialList].filter(ticket => {
+                const checkSegmentStops = (segmentNum) => {
+                    return action.filter.includes(ticket.segments[segmentNum].stops.length)
+                }
+                return checkSegmentStops(0) && checkSegmentStops(1)
+            })
+            return {
+                ...state,
+                currList: filteredTickets
             }
         }
         default:
