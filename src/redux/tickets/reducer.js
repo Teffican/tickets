@@ -1,9 +1,10 @@
-import { SET_IS_LOADED, SET_SEARCH_ID, SET_TICKETS } from "./actions"
+import { SET_IS_LOADED, SET_SEARCH_ID, SET_TICKETS, SORT_TICKETS } from "./actions"
 
 const initialState = {
     searchId: '',
     isLoaded: false,
-    list: []
+    initialList: [],
+    currList: []
 }
 
 const TicketsReducer = (state = initialState, action) => {
@@ -11,7 +12,8 @@ const TicketsReducer = (state = initialState, action) => {
         case SET_TICKETS:
             return {
                 ...state,
-                list: action.tickets,
+                initialList: action.tickets,
+                currList: action.tickets
             }
         case SET_IS_LOADED:
             return {
@@ -23,6 +25,24 @@ const TicketsReducer = (state = initialState, action) => {
                 ...state,
                 searchId: action.id
             }
+        case SORT_TICKETS: {
+            let sortedTickets = [...state.currList]
+            if(action.sortType === 'price'){
+                sortedTickets.sort((a,b) => a.price - b.price)
+            }
+            if(action.sortType === 'speed'){
+                sortedTickets.sort((a,b) => {
+                    const totalDurationA = a.segments[0].duration + a.segments[1].duration
+                    const totalDurationB = b.segments[0].duration + b.segments[1].duration
+
+                    return totalDurationA - totalDurationB
+                })
+            }
+            return {
+                ...state,
+                currList: sortedTickets
+            }
+        }
         default:
             return state
     }

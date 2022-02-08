@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 const TicketsList = () => {
   const dispatch = useDispatch()
-  const {searchId, list: tickets, isLoaded} = useSelector(state => state.tickets)
+  const {searchId, currList: tickets, isLoaded} = useSelector(state => state.tickets)
 
   React.useEffect(() => {
     dispatch(fetchSearchId())
