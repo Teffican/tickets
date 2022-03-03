@@ -12,6 +12,7 @@ export const fetchSearchId = () => {
         fetch(`${URL}/search`)
             .then(res => res.json())
             .then(data => dispatch(setSearchId(data.searchId)))
+            .finally(() => dispatch(setIsLoaded(true)))
     }
 }
 
